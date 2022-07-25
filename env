@@ -1,0 +1,5 @@
+POSTGRES_USER=de_project_user
+POSTGRES_PASSWORD=de_project_password
+POSTGRES_DB=Exchange
+POSTGRES_HOST=warehouse
+POSTGRES_PORT=5432

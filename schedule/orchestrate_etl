@@ -1,0 +1,2 @@
+* * * * * DATABASE_USER=de_project_user DATABASE_PASSWORD=de_project_password DATABASE_DB=Exchange DATABASE_HOST=warehouse DATABASE_PORT=5432 /usr/local/bin/python /code/scripts/cost_data_etl.py > /proc/1/fd/1 2>/proc/1/fd/2
+

@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  warehouse:
+    image: postgres:14
+    container_name: warehouse
+    environment:
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d/
+      - ./postgres-data:/var/lib/postgresql/data
+    restart: always
+    ports:
+      - "5439:5432"
+  runpipeline:
+    image: runpipeline
+    container_name: runpipeline
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - ./:/code
+    environment:
+      DATABASE_USER: ${POSTGRES_USER}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+      DATABASE_DB: ${POSTGRES_DB}
+      DATABASE_HOST: ${POSTGRES_HOST}
+      DATABASE_PORT: ${POSTGRES_PORT}
+    
+
+    
