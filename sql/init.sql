@@ -11,5 +11,5 @@ CREATE TABLE IF NOT EXISTS crypto.assets (
 	price NUMERIC,
 	change_per_24hr NUMERIC,
 	volume_we_24hr NUMERIC,
-	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	update_utc TIMESTAMP WITH TIME ZONE
 );

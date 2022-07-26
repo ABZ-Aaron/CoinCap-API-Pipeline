@@ -1,19 +1,26 @@
 version: '3'
 
 services:
+
   warehouse:
     image: postgres:14
     container_name: warehouse
     environment:
-        POSTGRES_USER: ${POSTGRES_USER}
-        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-        POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - ./sql:/docker-entrypoint-initdb.d/
-      - ./postgres-data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data:rw
     restart: always
     ports:
       - "5439:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   runpipeline:
     image: runpipeline
     container_name: runpipeline
@@ -28,6 +35,26 @@ services:
       DATABASE_DB: ${POSTGRES_DB}
       DATABASE_HOST: ${POSTGRES_HOST}
       DATABASE_PORT: ${POSTGRES_PORT}
-    
+    depends_on: 
+      warehouse:
+        condition: service_healthy
 
-    
+  metabase:
+    image: metabase/metabase:latest
+    container_name: metabase
+    platform: linux/amd64
+    ports:
+      - "3000:3000"
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: ${POSTGRES_DB}
+      MB_DB_PORT: ${POSTGRES_PORT}
+      MB_DB_USER: ${POSTGRES_USER}
+      MB_DB_PASS: ${POSTGRES_PASSWORD}
+      MB_DB_HOST: ${POSTGRES_HOST}
+    depends_on: 
+      warehouse:
+        condition: service_healthy
+        
+volumes:
+  pgdata:

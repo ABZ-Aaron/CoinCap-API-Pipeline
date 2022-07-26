@@ -17,5 +17,5 @@ RUN crontab /etc/cron.d/orchestrate_etl
 
 RUN touch /var/log/cron.log
 
-CMD ["cron", "-f"]
+CMD sh /code/docker/commands.sh
 

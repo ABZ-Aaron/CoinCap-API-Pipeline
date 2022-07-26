@@ -2,6 +2,7 @@
 
 import psycopg2 as pg
 from psycopg2.extras import execute_values
+from datetime import datetime, timezone
 import requests
 import sys
 import os
@@ -24,28 +25,37 @@ def connect_to_db():
                           password = os.getenv('DATABASE_PASSWORD'), 
                           port = os.getenv('DATABASE_PORT'))
     except Exception as ex:
-        print("There's been an issue connecting to database")
+        print(f"There's been an issue connecting to database: {ex}")
         sys.exit(1)
     return conn
 
 def ingest_data(conn, data):
     cur = conn.cursor()
-    columns = "id,rank,symbol,name,supply,max_supply,market_cap,volume_24hr,price,change_per_24hr,volume_we_24hr"
+    columns = "id,rank,symbol,name,supply,max_supply,market_cap,volume_24hr,price,change_per_24hr,volume_we_24hr,update_utc"
     query = "INSERT INTO crypto.assets ({}) VALUES %s".format(columns)
     values = [[value for value in coin.values()] for coin in data]
-    execute_values(cur, query, values)
+    try:
+        execute_values(cur, query, values)
+    except Exception as ex:
+        print(f"There was an issue inserting data in db: {ex}")
     conn.commit()
 
-def remove_column(data):
-    """Remove explorer key"""
+def remove_key(data):
+    """Remove Explorer Key from Data if exists"""
     return [{k: v for k, v in d.items() if k != 'explorer'} for d in data]
+
+def add_utc_time_key(data):
+    """Added current UTC time to Data"""
+    now = datetime.now(timezone.utc)
+    return [dict(d, **{'update_utc' : now}) for d in data]
 
 def run():
     data = get_data()
-    data = remove_column(data)
+    data = add_utc_time_key(data)
+    data = remove_key(data)
     conn = connect_to_db()
     ingest_data(conn, data)
 
 if __name__ == "__main__":
     run()
-    print("Updated")
+    print(f"Update Successful at {datetime.now(timezone.utc)} utc")

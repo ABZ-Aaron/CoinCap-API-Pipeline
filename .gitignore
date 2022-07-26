@@ -1,3 +1,6 @@
 venv
 postgres-data
 .vscode
+aws
+test.txt
+.DS_Store
