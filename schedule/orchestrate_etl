@@ -1,5 +1,5 @@
 SHELL=/bin/bash
-* * * * * /usr/local/bin/python /code/scripts/cost_data_etl.py > /proc/1/fd/1 2> /proc/1/fd/2 | tee -a /file.txt
+*/5 * * * * /usr/local/bin/python /code/scripts/cost_data_etl.py > /proc/1/fd/1 2> /proc/1/fd/2
 
 
 

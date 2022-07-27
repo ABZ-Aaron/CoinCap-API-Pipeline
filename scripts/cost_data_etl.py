@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 import psycopg2 as pg
 from psycopg2.extras import execute_values
 from datetime import datetime, timezone
@@ -9,8 +8,10 @@ import os
 
 def get_data():
     """Get CoinCap data"""
+    coin_list = ['bitcoin','ethereum','cosmos','solana','algorand','polygon','uniswap','dogecoin','litecoin','polkadot']
+    payload = {"ids" : ','.join(coin_list)}
     try:
-        r = requests.get("https://api.coincap.io/v2/assets", params = {'limit' : 10})
+        r = requests.get("https://api.coincap.io/v2/assets", params = payload)
     except Exception as ex:
         print("There's been an issue connecting to API")
         sys.exit(1)
@@ -19,7 +20,7 @@ def get_data():
 def connect_to_db():
     """Connect to database"""
     try:
-        conn = pg.connect(host = os.getenv('DATABASE_HOST'), 
+        conn = pg.connect(host = os.getenv('DATABASE_HOST', default = "warehouse"), 
                           database = os.getenv('DATABASE_DB'), 
                           user = os.getenv('DATABASE_USER'), 
                           password = os.getenv('DATABASE_PASSWORD'), 
