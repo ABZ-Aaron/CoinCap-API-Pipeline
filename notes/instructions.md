@@ -61,3 +61,32 @@
     ```bash
     docker compose --env-file env up --build -d
     ```
+
+## Access Metabase
+
+After a few minutes, everything should be setup, and you can now access your Metabase instance (running in Docker on EC2).
+
+To access, navigate to `<Public IPv4 DNS>:3000`, e.g., `ec2-x-x-xx-xx.eu-west-2.compute.amazonaws.com:3000`.
+
+You can then log in to Metabase and setup your dashboard.
+
+One setup, navigate to Metabase Admin settings and allow sharing. When you navigate back to dashboard, you'll have the option to share a link.
+
+## Shut Down Docker
+
+Connect to EC2 instance, navigate to `~/project` and run:
+
+```bash
+docker compose down
+```
+
+To clear all stopped containers, networks, volumes, and images, run:
+
+```bash
+docker system prune -a --volumes
+```
+* Warning - this will delete all data
+
+## Shut Down EC2
+
+This can be terminated from the AWS console. Don't forget to terminate this if you don't plan on keeping the pipeline running, as you could be charged.
