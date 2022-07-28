@@ -100,6 +100,8 @@ Host coincap
 ```
 
 Restart terminal and run `ssh coincap` to connect to your instance. Read more [here](https://www.digitalocean.com/community/tutorials/how-to-create-an-ssh-shortcut). This may not work on Windows.
+
+Note that the Public IPv4 DNS will change if you stop your instance, and restart it. 
 ## Shut Down Docker
 
 Connect to EC2 instance, navigate to `~/project` and run:
