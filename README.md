@@ -1,6 +1,6 @@
 # CoinCap ETL Project
 
-This is a simple data pipeline extracting cryptocurrency data from [CoinCap API](https://docs.coincap.io) utilising tools such as Docker, cron, PostgreSQL, and Metabase.
+This is a simple data pipeline extracting cryptocurrency data from [CoinCap API](https://docs.coincap.io) utilising tools such as Docker, cron, AWS EC2, PostgreSQL, and Metabase.
 
 It is based on a project by [Joseph Machado](https://www.startdataengineering.com/post/data-engineering-project-to-impress-hiring-managers/). I've made various amendments, including a different endpoint and extraction script, as well documented some design decisions and why there were made.
 
@@ -25,12 +25,11 @@ I wanted to create a simple ETL which would help develop my skills and knowledge
 
 Link ~ [here](http://ec2-3-8-21-66.eu-west-2.compute.amazonaws.com:3000/public/dashboard/6255ca8f-3c8c-4e1d-a7da-094a730dd1f8)
 
-## Setup & Design 
+## The Pipeline
 
-For an overview of the project, along with some design decisions, see [here](notes/design.md).
+1. [Setup](notes/instructions.md) ~ follow through these steps if you wish to setup something like this yourself.
 
-If you would like to set this project up yourself, I've provided some prerequisite steps and instructions [here](notes/instructions.md).
+1. [Design](notes/design.md) ~ here are some notes explaining the pipeline, and why certain design decisions were made.
 
-## Improvements
+1. [Improvements]() ~ here I've listed some improvements I plan to make.
 
-1. I plan to add in my own tests. This will include an integration test, to ensure all components of pipeline work together as expected, along with unit tests to ensure each component returns what's expected. I will also aim to include validation tests. These 
