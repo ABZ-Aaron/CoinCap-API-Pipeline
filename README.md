@@ -27,9 +27,9 @@ Link ~ [here](http://ec2-3-8-21-66.eu-west-2.compute.amazonaws.com:3000/public/d
 
 ## The Pipeline
 
-1. [Setup](notes/instructions.md) ~ follow through these steps if you wish to setup something like this yourself.
+1. [Setup](notes/instructions.md) ~ step-by-step instructions if you wish to setup this pipeline.
 
-1. [Design](notes/design.md) ~ here are some notes explaining the pipeline, and why certain design decisions were made.
+1. [Design](notes/design.md) ~ notes explaining the pipeline, and why certain design decisions were made.
 
-1. [Improvements]() ~ here I've listed some improvements I plan to make.
+1. [Improvements]() ~ listing of improvements I plan to make.
 

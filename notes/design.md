@@ -10,7 +10,7 @@
 
     - `runpipeline` ~ contains the code and cronjob.
     - `warehouse` ~ launches PostgreSQL 14.
-    - `metabase` ~ launches metabase server on port 3000
+    - `metabase` ~ launches metabase server on port 3000.
 
 1. Docker is run on an AWS EC2 instance.
 
@@ -44,8 +44,19 @@ The `init.sql` script creates a schema and table (if they don't already exist) w
 
 You might be wondering at what point this gets run in our pipeline. Well, if you check under the postgres `warehouse` service in the docker-compose file, you'll see the volume `- ./sql:/docker-entrypoint-initdb.d/`. Any SQL file that is added to the `/docker-entrypoint-initdb.d/` folder on the postgres container will be automatically run when the container starts. 
 
-### Docker Compose
+### Docker Compose
 
-As mentioned, there are 3 services run here. When we run the command `docker compose --env-file env up --build -d` this specifies that environmental variables should be taken from the `env` file. In our case, this contains our database details. Can see these being referenced in the docker-compose file, e.g., `${POSTGRES_DB}`. 
+As mentioned, there are 3 services run here. When we run the command `docker compose --env-file env up --build -d` this specifies that environmental variables should be taken from the `env` file. In our case, this contains our database details. You can see these being referenced in the docker-compose file, e.g., `${POSTGRES_DB}`. 
 
 Note the ports as well. For PostgreSQL the port 5432 in the container is mapped to the port 5439 on the host. Meaning we can connect to PostgreSQL on the host machine using port 5439.
+
+### Metabase
+
+In the docker-compose file, we've added some environmental variables for Metabase. These allow for persistent data. This means that even if we stop and remove the Metabase container, the data associated with Metabase will remain.
+
+Essentially, Metabase is storing this data in the PostgreSQL database we are using to store CoinCap data, which itself is being persisted through the use of docker volumes.
+
+
+### EC2
+
+Running on EC2 is useful as it means we don't exert our own personal machines running a Docker container 24/7 without rest. It also means that we can share our Metabase dashboard publicly. 
