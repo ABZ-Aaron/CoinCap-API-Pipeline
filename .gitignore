@@ -4,3 +4,4 @@ postgres-data
 aws
 test.txt
 .DS_Store
+project.gzip

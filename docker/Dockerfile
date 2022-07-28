@@ -15,7 +15,5 @@ RUN chmod 0644 /etc/cron.d/orchestrate_etl
 
 RUN crontab /etc/cron.d/orchestrate_etl
 
-RUN touch /var/log/cron.log
-
 CMD sh /code/docker/commands.sh
 
