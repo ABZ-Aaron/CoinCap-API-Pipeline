@@ -1,7 +1,5 @@
 # CoinCap ETL Project
 
-IN PROGRESS
-
 This is a simple data pipeline extracting cryptocurrency data from [CoinCap API](https://docs.coincap.io) utilising tools such as Docker, cron, PostgreSQL, and Metabase.
 
 It is based on a project by [Joseph Machado](https://www.startdataengineering.com/post/data-engineering-project-to-impress-hiring-managers/). I've made some amendments, including a different endpoint and extraction script.
