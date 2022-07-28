@@ -2,7 +2,7 @@
 
 * Install [Docker & Docker Compose](https://docs.docker.com/compose/install/compose-desktop/)
 * AWS [account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/) & AWS [CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)
-* AWS [EC2 instance](https://docs.aws.amazon.com/efs/latest/ug/gs-step-one-create-ec2-resources.html) ~ Select Ubuntu image. Create key pair and download `.pem` file. This will allow you to connect to instance. Under Network Settings, set inbound rule for security group to include port `3000`. You can try this project using a free-tier instance (1 GiB memory) but I found this wasn't enough. If you opt for a non-free tier instance, use the [pricing calculator](https://calculator.aws/#/) to estimate cost. Once set up, take note of the Public IPv4 DNS.
+* AWS [EC2 instance](https://docs.aws.amazon.com/efs/latest/ug/gs-step-one-create-ec2-resources.html) ~ Select Ubuntu image. Create key pair and download `.pem` file. This will allow you to connect to instance. Under Network Settings, set inbound rule for security group to include port `3000`. You can try this project using a free-tier instance (1 GiB memory) but I found this wasn't enough. You may need to upgrade to 2 GiB which could cost about $10 per month). If you opt for a non-free tier instance, use the [pricing calculator](https://calculator.aws/#/) to estimate cost. Once set up, take note of the Public IPv4 DNS.
 
 ## Setup
 
@@ -71,6 +71,16 @@ To access, navigate to `<Public IPv4 DNS>:3000`, e.g., `ec2-x-x-xx-xx.eu-west-2.
 You can then log in to Metabase and setup your dashboard.
 
 One setup, navigate to Metabase Admin settings and allow sharing. When you navigate back to dashboard, you'll have the option to share a link.
+
+## Access Postgres from Local Machine
+
+Postgres is running within a container on your EC2 instance. However, the container port is mapped to port `5439` on the host. Therefore to connect to Postgres, you'll need the  Public IPv4 DNS address of your EC2 instance (found in the details section in AWS EC2 console) along with database credentials. 
+
+The way I like to connect is through PgAdmin. You can install it to your local machine [here](https://www.pgadmin.org/download/). 
+
+Once setup, right-click **Servers** on left-hand pane, and register a new server. Enter the `Public IPv4 DNS` address, e.g., ec2-x-x-xx-xx.eu-west-2.compute.amazonaws.com, port `5439`, and database `Exchange`. Fill in password and username with what was defined in the **env** file.
+
+You can now query the PostgreSQL table - `assets` stored under schema `crypto`.
 
 ## Shut Down Docker
 
