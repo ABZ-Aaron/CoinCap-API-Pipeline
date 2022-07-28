@@ -82,6 +82,24 @@ Once setup, right-click **Servers** on left-hand pane, and register a new server
 
 You can now query the PostgreSQL table - `assets` stored under schema `crypto`.
 
+## EC2 Connection Shortcut
+
+You can setup a shortcut to accessing your EC2 instance. First open up SSH config file:
+
+```bash
+cd ~/.ssh
+nano config
+```
+Add the following to the config file, replacing where necessary:
+
+```config
+Host coincap
+    HostName <Public IPv4 DNS>
+    User ubuntu
+    IdentityFile <Path to your PEM file>
+```
+
+Restart terminal and run `ssh coincap` to connect to your instance. Read more [here](https://www.digitalocean.com/community/tutorials/how-to-create-an-ssh-shortcut). This may not work on Windows.
 ## Shut Down Docker
 
 Connect to EC2 instance, navigate to `~/project` and run:
