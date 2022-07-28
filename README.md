@@ -2,11 +2,11 @@
 
 This is a simple data pipeline extracting cryptocurrency data from [CoinCap API](https://docs.coincap.io) utilising tools such as Docker, cron, PostgreSQL, and Metabase.
 
-It is based on a project by [Joseph Machado](https://www.startdataengineering.com/post/data-engineering-project-to-impress-hiring-managers/). I've made some amendments, including a different endpoint and extraction script.
+It is based on a project by [Joseph Machado](https://www.startdataengineering.com/post/data-engineering-project-to-impress-hiring-managers/). I've made various amendments, including a different endpoint and extraction script, as well documented some design decisions and why there were made.
 
 ## Motivation
 
-I wanted to create a simple ETL which would help develop my skills further. I also have a passing interest in crypto, and the API used in [Joseph's](https://www.startdataengineering.com/post/data-engineering-project-to-impress-hiring-managers/) project was a good place to explore this.
+I wanted to create a simple ETL which would help develop my skills and knowledge further. I also have a passing interest in crypto, and the CoinCap API was a good place to explore this.
 
 ## Architecture
 
@@ -31,4 +31,6 @@ For an overview of the project, along with some design decisions, see [here](not
 
 If you would like to set this project up yourself, I've provided some prerequisite steps and instructions [here](notes/instructions.md).
 
+## Improvements
 
+1. I plan to add in my own tests. This will include an integration test, to ensure all components of pipeline work together as expected, along with unit tests to ensure each component returns what's expected. I will also aim to include validation tests. These 

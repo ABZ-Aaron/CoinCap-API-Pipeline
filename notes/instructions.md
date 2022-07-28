@@ -10,8 +10,8 @@
 
     ```bash
     # Clone Repo
-    git clone
-    cd
+    git clone https://github.com/ABZ-Aaron/CoinCap-API-Pipeline.git
+    cd CoinCap-API-Pipeline
     ```
 
 1. Change **password** & **username** in **env** file.
