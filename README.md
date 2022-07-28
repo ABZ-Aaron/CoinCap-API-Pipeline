@@ -20,6 +20,8 @@ I wanted to create a simple ETL which would help develop my skills further. I al
 
 ## Output
 
+<img src="https://github.com/ABZ-Aaron/CoinCap-API-Pipeline/blob/master/images/dashboard.png" width=70% height=70%>
+
 ## Setup & Design 
 
 For an overview of the project, along with some design decisions, see [here](notes/design.md).
