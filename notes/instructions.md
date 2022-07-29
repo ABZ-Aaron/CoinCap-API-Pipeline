@@ -118,6 +118,8 @@ sudo apt-get autoremove
 ```
 ## Access Postgres from Local Machine
 
+### PgAdmin (Graphical User Interface)
+
 Postgres is running within a container on your EC2 instance. However, the container port is mapped to port `5439` on the host. Therefore to connect to Postgres, you'll need the  Public IPv4 DNS address of your EC2 instance (found in the details section in AWS EC2 console) along with database credentials. 
 
 The way I like to connect is through PgAdmin. You can install it to your local machine [here](https://www.pgadmin.org/download/). 
@@ -125,6 +127,8 @@ The way I like to connect is through PgAdmin. You can install it to your local m
 Once setup, right-click **Servers** on left-hand pane, and register a new server. Enter the `Public IPv4 DNS` address, e.g., ec2-x-x-xx-xx.eu-west-2.compute.amazonaws.com, port `5439`, and database `Exchange`. Fill in password and username with what was defined in the **env** file.
 
 You can now query the PostgreSQL table - `assets` stored under schema `crypto`.
+
+### Pgcli (Command Line Interface)
 
 You can also ues the Python package `pgcli` if you'd like to access postgres from the command line:
 
