@@ -118,6 +118,8 @@ sudo apt-get autoremove
 ```
 ## Access Postgres from Local Machine
 
+Note, you may need to add a new inbound rule to your EC2 security group to access Postgres.
+
 ### PgAdmin (Graphical User Interface)
 
 Postgres is running within a container on your EC2 instance. However, the container port is mapped to port `5439` on the host. Therefore to connect to Postgres, you'll need the  Public IPv4 DNS address of your EC2 instance (found in the details section in AWS EC2 console) along with database credentials. 
