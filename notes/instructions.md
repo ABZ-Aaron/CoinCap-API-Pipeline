@@ -97,6 +97,25 @@ delete from crypto.assets
 where update_utc < now() - interval '60 days';
 ```
 
+You can also try clearing some storage with these commands:
+
+```bash
+# Removes all stopped containers, all networks not used by at least
+# one container, all images without at least one container associated with them, 
+# and all build cache
+docker system prune -a
+
+# Delete downloaded packages already installed
+# that are already needed
+sudo apt-get clean
+
+# Remove all stored archives in cache for packages 
+# that can not be downloaded anymore .
+sudo apt-get autoclean
+
+# Remove unnecessary packages
+sudo apt-get autoremove
+```
 ## Access Postgres from Local Machine
 
 Postgres is running within a container on your EC2 instance. However, the container port is mapped to port `5439` on the host. Therefore to connect to Postgres, you'll need the  Public IPv4 DNS address of your EC2 instance (found in the details section in AWS EC2 console) along with database credentials. 
@@ -107,6 +126,19 @@ Once setup, right-click **Servers** on left-hand pane, and register a new server
 
 You can now query the PostgreSQL table - `assets` stored under schema `crypto`.
 
+You can also ues the Python package `pgcli` if you'd like to access postgres from the command line:
+
+```bash
+# Install pgcli
+pip install pgcli
+```
+
+Once installed, enter this into the terminal, replacing username and host with relevant details:
+
+```bash
+pgcli -h <Public IPv4 DNS> -p 5439 -U <Postgres Username> -d Exchange
+```
+You'll then be promoted to enter the Postgres password. Once complete, you can now run queries on your database. You can find some more info [here](https://www.geeksforgeeks.org/pgcli-python-package-for-a-interactive-postgres-cli/).
 ## EC2 Connection Shortcut
 
 You can setup a shortcut to accessing your EC2 instance. First open up SSH config file:

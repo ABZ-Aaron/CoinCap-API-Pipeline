@@ -34,8 +34,8 @@ def ingest_data(conn, data):
     """Load data into database"""
     cur = conn.cursor()
     columns = ['id','rank','symbol','name','supply','max_supply','market_cap','volume_24hr','price','change_per_24hr', 'volume_we_24hr', 'update_utc']
-    columns = ','.join(columns)
-    query = "INSERT INTO crypto.assets ({}) VALUES %s".format(columns)
+    cols = ','.join(columns)
+    query = "INSERT INTO crypto.assets ({}) VALUES %s".format(cols)
     values = [[value for value in coin.values()] for coin in data]
     try:
         execute_values(cur, query, values)
