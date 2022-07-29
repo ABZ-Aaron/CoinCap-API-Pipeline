@@ -143,6 +143,7 @@ Once installed, enter this into the terminal, replacing username and host with r
 pgcli -h <Public IPv4 DNS> -p 5439 -U <Postgres Username> -d Exchange
 ```
 You'll then be promoted to enter the Postgres password. Once complete, you can now run queries on your database. You can find some more info [here](https://www.geeksforgeeks.org/pgcli-python-package-for-a-interactive-postgres-cli/).
+
 ## EC2 Connection Shortcut
 
 You can setup a shortcut to accessing your EC2 instance. First open up SSH config file:
@@ -163,6 +164,17 @@ Host coincap
 Restart terminal and run `ssh coincap` to connect to your instance. Read more [here](https://www.digitalocean.com/community/tutorials/how-to-create-an-ssh-shortcut). This may not work on Windows.
 
 Note that the Public IPv4 DNS will change if you stop your instance, and restart it. 
+
+## Check Logs
+
+You can check the logs of your containers with:
+
+```bash
+docker logs <container ID> or <container name>
+```
+
+Run command `docker ps` if you don't know what these are. 
+
 ## Shut Down Docker
 
 Connect to EC2 instance, navigate to `~/project` and run:
@@ -176,7 +188,7 @@ To clear all stopped containers, networks, volumes, and images, run:
 ```bash
 docker system prune -a --volumes
 ```
-* Warning - this will delete all data, as you'll be removing volumes
+* Warning - this will delete all coin data and metabase data, as you'll be removing volumes which are used to persist data.
 
 ## Shut Down EC2
 
