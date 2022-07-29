@@ -118,7 +118,7 @@ sudo apt-get autoremove
 ```
 ## Access Postgres from Local Machine
 
-Note, you may need to add a new inbound rule to your EC2 security group to access Postgres.
+Note, you may need to add a new inbound rule to your EC2 security group to access Postgres, e.g., Custom TCP, Port 5439, with Source being your IP address. A security group dictates what traffic and enter and leave your EC2 instance.
 
 ### PgAdmin (Graphical User Interface)
 
@@ -169,13 +169,13 @@ Note that the Public IPv4 DNS will change if you stop your instance, and restart
 
 ## Check Logs
 
-You can check the logs of your containers with:
+For now, you can check the logs of your containers with:
 
 ```bash
 docker logs <container ID> or <container name>
 ```
 
-Run command `docker ps` if you don't know what these are. 
+Run command `docker ps` if you don't know what these are.
 
 ## Shut Down Docker
 
