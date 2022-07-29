@@ -1,19 +1,27 @@
+# Set the baseimage
 FROM python:3.9.5
 
-WORKDIR /code
-ENV PYTHONPATH=/code/src
+# Create folder and change to working directory
+WORKDIR /project
 
-RUN apt-get update && apt-get install cron -y
+# Install cron and nano
+RUN apt-get update && apt-get install cron -y nano
 
-ADD ./requirements.txt requirements.txt
+# Copy project folder over to container
+COPY ./ /project/
+
+# Install python packages
 RUN pip install -r requirements.txt
 
-COPY ./ /code/
+# Copy cron file into cron directory
 COPY ./schedule/orchestrate_etl /etc/cron.d/orchestrate_etl
 
+# Give rights to cron file
 RUN chmod 0644 /etc/cron.d/orchestrate_etl
 
+# Apply cron job
 RUN crontab /etc/cron.d/orchestrate_etl
 
-CMD sh /code/docker/commands.sh
+# Run shell script upon container creation
+CMD sh /project/docker/commands.sh
 

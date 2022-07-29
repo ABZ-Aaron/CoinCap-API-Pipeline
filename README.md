@@ -2,7 +2,7 @@
 
 This is a simple data pipeline extracting cryptocurrency data from [CoinCap API](https://docs.coincap.io) utilising tools such as Docker, cron, AWS EC2, PostgreSQL, and Metabase.
 
-It is based on a project by [Joseph Machado](https://www.startdataengineering.com/post/data-engineering-project-to-impress-hiring-managers/). I've made various amendments, including a different endpoint and extraction script, as well documented some design decisions and why there were made.
+It is based on a project by [Joseph Machado](https://www.startdataengineering.com/post/data-engineering-project-to-impress-hiring-managers/). I've made various amendments, including using a different endpoint and extraction script, updating containers to allow for data persistence, and documenting some design decisions.
 
 ## Motivation
 
@@ -15,7 +15,8 @@ I wanted to create a simple ETL which would help develop my skills and knowledge
 1. Extract data using [CoinCap API](https://docs.coincap.io)
 1. Load data into [PostgreSQL](https://www.postgresql.org)
 1. Connect with [Google Data Studio](https://datastudio.google.com) dashboard
-1. Orchestrate using [cron](https://en.wikipedia.org/wiki/Cron) within [Docker](https://www.docker.com)
+1. Orchestrate using [cron](https://en.wikipedia.org/wiki/Cron) 
+1. Run with [Docker](https://www.docker.com)
 1. Data visualisation with [Metabase](https://www.metabase.com)
 
 
@@ -27,7 +28,7 @@ Link ~ [here](http://ec2-3-8-21-66.eu-west-2.compute.amazonaws.com:3000/public/d
 
 ## The Pipeline
 
-1. [Setup](notes/instructions.md) ~ step-by-step instructions if you wish to setup this pipeline.
+1. [Setup](notes/instructions.md) ~ step-by-step instructions to setup pipeline
 
 1. [Design](notes/design.md) ~ notes explaining the pipeline, and why certain design decisions were made.
 
