@@ -31,17 +31,20 @@ def connect_to_db():
     return conn
 
 def ingest_data(conn, data):
+    """Load data into database"""
     cur = conn.cursor()
-    columns = "id,rank,symbol,name,supply,max_supply,market_cap,volume_24hr,price,change_per_24hr,volume_we_24hr,update_utc"
+    columns = ['id','rank','symbol','name','supply','max_supply','market_cap','volume_24hr','price','change_per_24hr', 'volume_we_24hr', 'update_utc']
+    columns = ','.join(columns)
     query = "INSERT INTO crypto.assets ({}) VALUES %s".format(columns)
     values = [[value for value in coin.values()] for coin in data]
     try:
         execute_values(cur, query, values)
     except Exception as ex:
         print(f"There was an issue inserting data in db: {ex}")
+        sys.exit(1)
     conn.commit()
 
-def remove_key(data):
+def remove_explorer_key(data):
     """Remove Explorer Key from Data if exists"""
     return [{k: v for k, v in d.items() if k != 'explorer'} for d in data]
 
@@ -53,7 +56,7 @@ def add_utc_time_key(data):
 def run():
     data = get_data()
     data = add_utc_time_key(data)
-    data = remove_key(data)
+    data = remove_explorer_key(data)
     conn = connect_to_db()
     ingest_data(conn, data)
 
