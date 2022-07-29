@@ -68,9 +68,34 @@ After a few minutes, everything should be setup, and you can now access your Met
 
 To access, navigate to `<Public IPv4 DNS>:3000`, e.g., `ec2-x-x-xx-xx.eu-west-2.compute.amazonaws.com:3000`.
 
-You can then log in to Metabase and setup your dashboard.
+You can then log in to Metabase, connect to Postgres, and setup your dashboard.
 
-One setup, navigate to Metabase Admin settings and allow sharing. When you navigate back to dashboard, you'll have the option to share a link.
+Once setup, navigate to Metabase Admin settings and allow sharing. When you navigate back to dashboard, you'll have the option to share a link.
+
+## Keeping An Eye On Storage & Memory
+
+A couple things you'll need to keep on eye are storage and memory on your EC2 instance, to ensure you're not running out.
+
+To check available memory usage on Ubuntu:
+
+```bash
+free -h
+```
+
+To check available storage on Ubuntu:
+
+```bash
+df -h
+```
+
+If you find you're running out of memory, you may need to upgrade your EC2 instance, or employ some tricks to reduce memory consumption. If memory is depleted, you may find the instance becomes [unresponsive](https://aws.amazon.com/premiumsupport/knowledge-center/ec2-linux-prevent-over-utilization/) and you'll need to stop and reboot.
+
+If you find you're running out of storage, you can either upgrade your EC2 instance, or delete old records from the PostgreSQL database. This could be achieved by adding another cron job in Docker which runs something like the following after connecting to the database:
+
+```sql
+delete from crypto.assets
+where update_utc < now() - interval '60 days';
+```
 
 ## Access Postgres from Local Machine
 
@@ -115,7 +140,7 @@ To clear all stopped containers, networks, volumes, and images, run:
 ```bash
 docker system prune -a --volumes
 ```
-* Warning - this will delete all data
+* Warning - this will delete all data, as you'll be removing volumes
 
 ## Shut Down EC2
 
