@@ -62,6 +62,8 @@
     docker compose --env-file env up --build -d
     ```
 
+You should then have three running containers (check with the `docker ps` command). Also consider installing the Docker extension with VS Code on your local machine. It provides a simple GUI for viewing the contents of running containers.
+
 ## Access Metabase
 
 After a few minutes, everything should be setup, and you can now access your Metabase instance (running in Docker on EC2).
