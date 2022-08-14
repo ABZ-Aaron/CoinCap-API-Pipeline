@@ -56,7 +56,6 @@ In the docker-compose file, we've added some environmental variables for Metabas
 
 Essentially, Metabase is storing this data in the PostgreSQL database we are using to store CoinCap data, which itself is being persisted through the use of docker volumes.
 
-
 ### EC2
 
 Running on EC2 is useful as it means we don't exert our own personal machines running a Docker container 24/7 without rest. It also means that we can share our Metabase dashboard publicly. 

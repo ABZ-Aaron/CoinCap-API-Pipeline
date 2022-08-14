@@ -32,5 +32,5 @@ Link ~ [here](http://ec2-3-8-21-66.eu-west-2.compute.amazonaws.com:3000/public/d
 
 1. [Design](notes/design.md) ~ pipeline description and design decisions.
 
-1. [Improvements]() ~ listing of improvements I plan to make.
+1. [Improvements](notes/improvements.md) ~ listing of improvements I plan to make.
 
