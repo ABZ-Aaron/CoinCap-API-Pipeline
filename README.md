@@ -19,12 +19,9 @@ I wanted to create a simple ETL which would help develop my skills and knowledge
 1. Run with [Docker](https://www.docker.com)
 1. Data visualisation with [Metabase](https://www.metabase.com)
 
-
 ## Output
 
 <img src="https://github.com/ABZ-Aaron/CoinCap-API-Pipeline/blob/master/images/dashboard.png" width=70% height=70%>
-
-Link ~ [here](http://ec2-3-8-21-66.eu-west-2.compute.amazonaws.com:3000/public/dashboard/6255ca8f-3c8c-4e1d-a7da-094a730dd1f8)
 
 ## The Pipeline
 
